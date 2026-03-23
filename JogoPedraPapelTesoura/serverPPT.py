@@ -4,11 +4,11 @@ import socket
 HOST = "0.0.0.0"
 PORT = 9002
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen(1)
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: #Cria new conexão
+    s.bind((HOST, PORT)) #Diz ao comp q quer conexão com esses em específico
+    s.listen(1) #Monopoliza 
 
-    #aguarda gamers
+    #Aguarda gamers
     print("[Server] Aguardando Jogador 1".encode())
     conn_1, addr_1 = s.accept() #s.accept() -> Faz par com s.recv(...)
     conn_1.sendall("[Server] OK. Você é o jogador 1".encode())
@@ -30,6 +30,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     conn_1.sendall("Vencedor é..".encode())
     conn_2.sendall("Vencedor é..".encode()) #.encode() -> "Codifica" a string p bits.
 
+    #Cálculo d comparação p descobrir qm venceu
     match j:
         case "pedra":
             if j2 == "papel":
