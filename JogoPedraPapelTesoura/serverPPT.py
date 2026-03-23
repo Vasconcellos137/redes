@@ -9,18 +9,26 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.listen(1)
 
     #aguarda gamers
-    print("[Server] Aguardando Jogador 1")
-    conn_1, addr_1 = s.accept()
+    print("[Server] Aguardando Jogador 1".encode())
+    conn_1, addr_1 = s.accept() #s.accept() -> Faz par com s.recv(...)
     conn_1.sendall("[Server] OK. Você é o jogador 1".encode())
-    conn_1.sendall("[Server] Aguardando Jogador 2")
+    conn_1.sendall("[Server] Aguardando Jogador 2".encode())
 
     conn_2, addr_2 = s.accept() 
     conn_2.sendall("[Server] OK. Você é o jogador 2".encode())
-    conn_2.sendall("[Server] Aguardando Jogador 1 iniciar")
-    # conn_1.sendall("[Server] Digite sua jogada: ")
+    conn_2.sendall("[Server] Aguardando Jogador 1 iniciar".encode())
 
-    j = conn_1.sendall("Escreva sua jogada: ")
-    j2 = conn_2.sendall("Escreva sua jogada: ")
+    conn_1.sendall("Escreva sua jogada: ".encode())
+    j = s.recv(1024).decode() 
+    print(j)
+    conn_1.sendall("Aguardando jogador 2 jogar...".encode())
+
+    conn_2.sendall("Escreva sua jogada: ".encode())
+    j2 = s.recv(1024).decode() #.decode() -> "Descodifica" os bits p string.
+    print(j2)
+
+    conn_1.sendall("Vencedor é..".encode())
+    conn_2.sendall("Vencedor é..".encode()) #.encode() -> "Codifica" a string p bits.
 
     match j:
         case "pedra":
@@ -45,14 +53,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             if j2 == "tesoura":
                 msg = "Empate"
 
-
-    #envia msg aos gamers.
-    # conn_1.sendall("[Server] OK. Você é o jogador 1".encode())
-    # conn_2.sendall("[Server] OK. Você é o jogador 2".encode())
+    conn_1.sendall(msg.encode())
+    conn_2.sendall(msg.encode())
 
     conn_1.close()
     conn_2.close()
-1.
-    # with conn:
-    #     data = conn.recv(1024)
-    #     conn.sendall(b"OK: " + data)1.
