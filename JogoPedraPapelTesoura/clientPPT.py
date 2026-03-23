@@ -1,7 +1,7 @@
 # Cliente
 import socket #importa biblioteca
 
-HOST = "192.168.246.106"
+HOST = "192.168.246.175"
 PORT = 9002              
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -10,7 +10,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
 
     #Recebe msg do server
-    msg = s.recv(1024).decode() #s.recv() -> Faz par com s.accept(...)
+    msg = s.recv(1024).decode() #s.recv() -> Faz par com s.accept(...) / recebe -> ("[Server] OK. Você é o jogador 1".encode())
     print(msg)
     msg = s.recv(1024).decode() 
     print(msg)
@@ -22,7 +22,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
     s.sendall(jog.encode())
 
-    msg = s.recv(1024).decode() #Msg p dizer q ta verificando qm venceu
+    msg = s.recv(1024).decode() 
     print(msg)
 
     print(s.recv(1024).decode()) #print resultado d if
