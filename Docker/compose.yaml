@@ -1,0 +1,7 @@
+# Docker Compose -> Lê o arquivo e coisa o bagulho diretamnete p nós
+
+services:
+  web:
+    image: httpd 
+
+# docker compose up -> no terminal, estando dentro d todas as pastas
