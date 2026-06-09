@@ -9,3 +9,4 @@
 # O conteúdo dessa pasta seraá copiado ou sobreposto na outra quando rodar:
 docker run --name web -p 8080:80 -v /home/aluno/wilson:/usr/local/apache2/htdocs httpd
 
+Container -> parte isolada de outros processos. 
