@@ -11,3 +11,6 @@ services:
 # Criando volume para persistência dos dados do banco de dados
 volumes:
   db_data:
+
+
+# fazer server subir p/ BD
