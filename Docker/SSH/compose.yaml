@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:16-alpine 
+    environment:
+      POSTGRES_DB: aluno
+      POSTGRES_USER: aluno
+      POSTGRES_PASSWORD: aluno
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+# Criando volume para persistência dos dados do banco de dados
+volumes:
+  db_data:
