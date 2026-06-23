@@ -24,6 +24,15 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  
+  frontend:
+    build: src/frontend
+    environment:
+      BACKEND_URL: ${BACKEND_URL}
+    ports: 
+      - "8080:5000"
+    depends_on:
+      - backend
 
 # Criando volume para persistência dos dados do banco de dados
 volumes:
