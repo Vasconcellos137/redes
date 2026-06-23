@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16-alpine 
+    image: postgres:16-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -8,12 +8,20 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  backend:
+    build: src/backend
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    ports: 
+      - "5001:5000"
+
 # Criando volume para persistência dos dados do banco de dados
 volumes:
   db_data:
 
-#Lê a senha direto do arquivo .env, evitando expor a senha no compose.yaml
 
-#fazer server subir p/ BD
+# Este arquivo:
+    #Lê a senha direto do arquivo .env, evitando expor a senha no compose.yaml
+    #fazer server subir p/ BD
+    #para executar -> docker compose up
 
-#para executar -> docker compose up

@@ -12,3 +12,4 @@ SSH
 
 scp -P 2222 garibaldo@192.168.246.106/config/prof/pudim.jpg
 
+dockerFile -> instruções para contruir uma img
