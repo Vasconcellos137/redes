@@ -1,0 +1,67 @@
+services:
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      networks:
+        backend_net
+
+  backend:
+    build: src/backend
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/healthcheck"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - frontend_net
+      - backend_net
+
+  frontend:
+    build: src/frontend
+    environment:
+      BACKEND_URL: ${BACKEND_URL}
+    ports:
+      - "8080:5000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - frontend_net
+
+# pode-se criar "perfis" no docker compose, logo, pode-se escolher qual vai up ou n...
+  test:
+    build: src/test
+    environment:
+      BACKEND_URL: ${BACKEND_URL}
+    networks:
+      - frontend_net
+    depends_on:
+      backend:
+        condition: service_healthy
+    profiles:
+      - test
+
+volumes:
+  db_data:
+
+# cria rede
+networks:
+  frontend_net:
+  backend_net:
+
