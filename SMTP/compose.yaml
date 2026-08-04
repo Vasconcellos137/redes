@@ -1,0 +1,11 @@
+services:
+  mailpit:
+    image: axllent/mailpit
+    hostname: mailpit
+    ports:
+      - "8025:8025"   # inspeção web
+      - "1025:1025"   # servidor SMTP
+
+
+
+      
