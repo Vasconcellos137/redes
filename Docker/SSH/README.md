@@ -1,4 +1,4 @@
-SSH
+# SSH
 - surgiu como solução para empregar segurança
 - secure shell
 
@@ -13,3 +13,15 @@ SSH
 scp -P 2222 garibaldo@192.168.246.106/config/prof/pudim.jpg
 
 dockerFile -> instruções para contruir uma img
+
+18.08.26
+
+## Acesso à máquina virtual
+ssh nome.sobrenome@192.168.246.131
+
+## P/ copiar arquivo p meu diretório
+- Deve ser feito na máquina local
+- scp origem <server> destino <local>
+
+### comando:
+scp nome.sobrenome@192.168.246.131:caminho_arquivo
