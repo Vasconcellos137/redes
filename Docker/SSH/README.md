@@ -25,3 +25,15 @@ ssh nome.sobrenome@192.168.246.131
 
 ### comando:
 scp nome.sobrenome@192.168.246.131:caminho_arquivo
+
+25.08.26
+
+## SSH 
+- SCP
+- Porta padrão: 22 - Tunelamento: 2222
+- Permite fazer túneis, um túnel é um "caminho" que permite que utilizemos uma outra máquina p acessar um server q n tenhos acessoa diretamente, o acesso ocorre passando por uma outra máquina, q faz com que a máquina original n fique visível espontâneamente.
+
+Comando: ssh -p 2222 -D 10800 <user>@192168246128
+
+senha_1.txt
+aGh2Ooz8Gi
