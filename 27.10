@@ -1,0 +1,34 @@
+Analise da saida do comando: 
+saida:
+logo:
+um endereço ip tem 32 bits -> 8 bytes
+
+8b = /8
+16b = /16
+
+0000 0000.0000 0000.0000 0000.0000 0000 -> 32bits
+
+0000 0000 -> /8b = A
+
+0000 0000 . 0000 0000 -> /16b = B
+
+0000 0000 . 0000 0000 . 0000 0000 -> /24b = C
+
+### comparar classes e ver quais estão na rede ou n
+
+Analizar os OCTETOS
+
+Comparar o 1° bit pra descobrir classe -> usar tabela nos materiais
+
+c -> analisa 3 octetos
+b -> analisa 2
+a -> analisa só o 1°
+
+### Ex. explicativo:
+
+130.10.15.27 e 130.11.15.30 -> o 1° em ambos é igual e acima de 127 -> classe B e o 2° em ambos é diferente, logo n estão na msm rede
+
+10.20.30.40 e 10.30.30.45 -> 1° em ambos é igual e abaixo de 127 -> classe A e msm rede
+
+200.10.20.30 e 200.10.21.50 -> 1° em ambos é igual e acima de 191 -> classe C e os 2°s são iguais, mas os 3°s são diferentes, logo não estão na msm rede 
+
