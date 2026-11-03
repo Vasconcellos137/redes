@@ -1,0 +1,121 @@
+Máscaras de rede: é um número de 32 bits que, junto com o endereço IP, divide o endereço em duas partes: uma para identificar a rede e outra para identificar os dispositivos (hosts) conectados a ela.
+
+/16 -> os primeiros 16 bits correspondem a rede. Outros 16 é pra máquina.
+
+Ex: 192.168.246.204 -> 192 = 8b; 168 = 8b; 246 = 8b; 204 = 8b
+
+Representação em binário:
+/16 -> 11111111.11111111.00000000.00000000
+         255      255       0        0
+                       32b
+
+Exercícios:
+
+1. (Conversão de prefixos em máscaras)
+Complete a tabela com as máscaras de sub-rede equivalentes a cada prefixo. A primeira linha é um exemplo.
+
+Prefixo	Decimal pontuada	Binário
+/16	255.255.0.0	11111111.11111111.00000000.00000000
+/8	255.0.0.0 11111111.00000000.00000000.00000000
+/19 255.255.224.0 11111111.11100000.00000000.00000000
+/24	255.255.255.0 11111111.11111111.11111111.00000000
+/14	255.252.0.0 11111111.11111100.00000000.00000000
+/30	255.255.255.        11111111.11111111.11111111.11111100	      
+/21	255.255.          11111111.11111111.11111000.00000000
+
+---
+
+* /24 -> Qm tem o endereço IP igual nos 24 primeiros bits, estão na mesma rede.
+2³²⁻m -> quantidade de máquinas dentro dessas redes -> EX: /25 = 2³²⁻²⁵ = 2⁷ = 128
+
+
+2. (Quantidade de endereços por prefixo)
+Calcule, para cada máscara de sub-rede, a quantidade máxima de endereços por sub-rede, incluindo os endereços de rede e de broadcast. A primeira linha é um exemplo.
+
+Máscara de sub-rede	Máximo de endereços
+/24	256
+/29	
+/21	
+/16	
+/13	
+/25	
+/19	
+/8	
+/11
+
+---
+
+* último octeto do endereço -> não se pode usar 0 ou 255 nessa posição -> São os endereços da rede e do broadcast -> enviar algo neles manda pra todas as redes.
+
+3. (Quantidade de hosts e de redes por prefixo)
+Complete a tabela. A coluna de redes indica quantas redes com aquele prefixo existem em todo o espaço de endereçamento IPv4, desconsiderando as faixas reservadas. A primeira linha é um exemplo.
+
+Máscara de sub-rede	Máximo de hosts	Máximo de redes no espaço IPv4
+/24	254	16777216 -> Máximo de hosts -> 2³²⁻m -2  &  Máximo de redes no espaço IPv4 -> 2²⁴
+/30	2 1073741824  
+
+---
+
+* Manter 16 primeiros bits e resto 0 -> endereço de rede
+0000 1010 . 0000 0001 . 0000 0000 . 0000 0000 -> rede
+   10          1            0           0
+
+* Mantem os 16 primeiros bits e resto 1 -> endereço de broadcast
+0000 1010 . 0000 0001 . 1111 1111 . 1111 1111 -> broadcast
+   10           1          255         255
+
+4. (Endereço de rede e de broadcast)
+Para cada host apresentado, indique o endereço da rede em que ele se encontra e o endereço de broadcast dessa rede. A primeira linha é um exemplo.
+
+Endereço	Endereço da rede	Endereço de broadcast
+10.1.1.17/16	10.1.0.0	10.1.255.255 -> 0000 1010 . 0000 0001 . 0000 0001 . 0001 0001
+1.1.2.86/28  1.1.2.80  1.1.2.95
+
+Converte p/ binário -> mantem 4 1°s -> 0101
+86 -> 0101 0110 -> 0101 0000 = 80
+Converte p/ binário -> mantem 4 últimos -> 0110
+86 -> 0101 0110 -> 0110 1111 = 95
+
+100.200.45.23/24	100.200.45.0  100.200.45.255	
+
+---
+
+5. (Validade de endereços de host)
+Informe se cada IP é válido (V) ou inválido (I) para um host com a máscara indicada. Caso não seja válido, informe o motivo.
+
+Máscara de sub-rede	IP	V / I	Motivo
+255.255.0.0  1.1.1.2.10	-> I	
+255.255.0.0  10.1.1.1	-> V
+255.255.0.0  10.255.2.10	-> 
+255.255.0.0	10.1.2.255		
+255.255.255.0	1.1.1.0		
+255.252.255.0	10.1.1.15		
+255.255.255.0	10.1.0.1		
+255.255.255.0	10.256.2.10		
+255.255.192.0	15.20.50.255		
+255.255.192.0	15.20.200.10		
+255.255.255.192	40.1.50.63		
+255.255.255.248	200.201.81.39		
+255.255.255.248	200.201.81.24		
+
+https://chatgpt.com/uc/6aea3aab-9f70-83ea-a90b-c7741326650b
+
+---
+
+* endereço de rede sempre é par 
+* endereço de broadcast sempre é ímpar
+
+6. (Gateway no último endereço) 
+O padrão de endereçamento interno de determinada empresa indica que o default gateway de uma sub-rede deve sempre ocupar o último endereço disponível para hosts. 
+Considerando que uma filial recebeu da matriz a sub-rede 192.168.15.128/255.255.255.240, qual endereço deve ser utilizado para o default gateway?
+
+240 em bin -> 11110000 
+128 em bin -> 10000000
+
+Calcular o broadcast -1 pra achar o último endereço válido.
+
+a. 192.168.15.142 -> X
+b. 192.168.15.143
+c. 192.168.15.129
+d. 192.168.15.254 
+e. 192.168.15.255
