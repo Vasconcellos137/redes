@@ -1,0 +1,40 @@
+DHCP -> Protocolo estartado quando máquina não tem endereço IP, usado p/ obter endereço IP automaticamente. Oferece um pacote de coisas pra configurar a máquina.
+
+Endereço fixo: mec, direto na placa.
+Endereço IP: da interface, não gravado na placa.
+
+Máscara de subrede -> a máquina que eu quero comunicar está ou não na minha rede ?
+
+lease_time -> tempo que o IP da sua máquina lhe pertence, apoós esse tempo, ele pode mudar.
+
+site com paradas legais explicando o conteúdo: https://protocol-explorer-alpha.vercel.app/
+
+DHCP -> usa pra pedir um endereço IP, é um protocolo da camada de aplicação.
+
+---
+
+NAT
+- Permite que endereços de redes locais possam usar a internet. 
+- Roda dentro dos roteadores, do gatway padrão.
+- Só quando for mander coisas pra fora da rede.
+- Problemas: Limitação da mémoria do roteador...
+
+- Vantagens e desvantagens:
+ • Conservação de endereços IPv4: Permite que centenas ou milhares de dispositivos em uma rede privada compartilhem um único endereço IP público (através do PAT / Overload), retardando o esgotamento dos IPv4.
+ • Segurança e privacidade aprimoradas: Oculta a estrutura real e os endereços IP dos dispositivos da rede interna contra a internet pública, funcionando como uma camada básica de proteção.
+ • Facilidade de gerenciamento: Permite alterar a numeração interna da rede ou mover aparelhos de lugar sem precisar reconfigurar o acesso externo de cada um.
+ • Flexibilidade na rede local: Evita a necessidade de obter um IP público exclusivo e registrado para cada máquina conectada.
+
+ • Atraso no desempenho da rede: O roteador precisa inspecionar, reescrever os cabeçalhos IP/TCP/UDP e recalcular somas de verificação (checksums) de cada pacote, o que adiciona latência.
+ • Quebra da comunicação ponta a ponta (End-to-End): Como o IP interno é mascarado, conexões que dependem de visibilidade direta sofrem bloqueios.
+ • Problemas com aplicações específicas: Dificulta ou impede o funcionamento nativo de certas tecnologias, como VoIP (chamadas em tempo real), jogos online peer-to-peer (P2P), algumas VPNs e conexões de entrada que exigem redirecionamento manual de portas (port forwarding).
+ • Complicações com NAT Duplo (Double NAT): Ocorre quando há duas traduções em sequência (ex: modem da operadora + roteador pessoal), elevando o ping e complicando configurações de rede.
+ • Dificuldade em auditorias e forense digital: Como múltiplos usuários compartilham o mesmo IP público, rastrear a atividade exata de um dispositivo específico exige cruzar logs temporários detalhados.
+
+- Tipos: 
+ • NAT estático ->	Um privado para um público fixo, um a um.	Servidor interno sempre no mesmo endereço público.
+ • NAT dinâmico	-> Privados para um conjunto de públicos. Hoje pouco usado.
+ • PAT, NAPT ou masquerade -> Endereço e porta de origem, com um único público. Redes domésticas, Docker, CGNAT.
+ • DNAT (port forwarding)	-> Endereço e porta de destino de conexões externas. Publicar um serviço interno.
+
+- 
